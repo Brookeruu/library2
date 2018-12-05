@@ -97,7 +97,6 @@ class Book
     end
 
   def ==(another_book)
-
     self.title().==(another_book.title()).&(self.author().==(another_book.author())).&(self.id().==(another_book.id())).&(self.duedate().==(another_book.duedate())).&(self.checkout().==(another_book.checkout()))
   end
 

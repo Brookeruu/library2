@@ -11,3 +11,5 @@ author   | character varying           |           |          |
 id       | integer                     |           | not null | nextval('book_id_seq'::regclass)
 duedate  | timestamp without time zone |           |          |
 checkout | boolean
+
+CREATE TABLE patron (name varchar, id serial PRIMARY KEY, checkout varchar, history varchar);
