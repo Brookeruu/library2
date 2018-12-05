@@ -43,8 +43,47 @@ class Book
     readable_book
   end
 
-    def self.search_by_author
+  def self.find_by_author(author)
+    book = DB.exec("SELECT * FROM book WHERE author = '#{author}';").first
+    title = book.fetch("title")
+    author = book.fetch("author")
+    id = book.fetch("id").to_i
+    duedate = book.fetch("duedate")
+    checkout = book.fetch("checkout")
+
+    readable_book = Book.new({:title => title, :author => author, :id => id, :duedate => duedate, :checkout => checkout})
+    readable_book
+  end
+
+  def self.find_by_title(title)
+    book = DB.exec("SELECT * FROM book WHERE title = '#{title}';").first
+    title = book.fetch("title")
+    author = book.fetch("author")
+    id = book.fetch("id").to_i
+    duedate = book.fetch("duedate")
+    checkout = book.fetch("checkout")
+
+    readable_book = Book.new({:title => title, :author => author, :id => id, :duedate => duedate, :checkout => checkout})
+    readable_book
+  end
+
+
+    def self.sort_by_author
       book_list = DB.exec("SELECT * FROM book ORDER BY author;")
+      books = []
+      book_list.each() do |book|
+        title = book.fetch("title")
+        author = book.fetch("author")
+        id = book.fetch("id").to_i
+        duedate = book.fetch("duedate")
+        checkout = book.fetch("checkout")
+        books.push(Book.new({:title => title, :author => author, :id => id, :duedate => duedate, :checkout => checkout}))
+      end
+      books
+    end
+
+    def self.sort_by_title
+      book_list = DB.exec("SELECT * FROM book ORDER BY title;")
       books = []
       book_list.each() do |book|
         title = book.fetch("title")
