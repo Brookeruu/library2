@@ -67,6 +67,19 @@ class Book
     readable_book
   end
 
+  def self.find_by_duedate(author)
+    
+    book = DB.exec("SELECT * FROM book WHERE duedate = '#{duedate}';").first
+    title = book.fetch("title")
+    author = book.fetch("author")
+    id = book.fetch("id").to_i
+    duedate = book.fetch("duedate")
+    checkout = book.fetch("checkout")
+
+    due_book = Book.new({:title => title, :author => author, :id => id, :duedate => duedate, :checkout => checkout})
+    due_book
+  end
+
 
     def self.sort_by_author
       book_list = DB.exec("SELECT * FROM book ORDER BY author;")
