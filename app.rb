@@ -11,14 +11,19 @@ get("/") do
   erb(:index)
 end
 
+get("/add_book") do
+  erb(:add_book)
+end
+
 post("/add_book") do
   title = params.fetch("title")
   author = params.fetch("author")
-  duedate = params.fetch("duedate")
-  checkout = params.fetch("checkout")
 
-  new_book = Book.new({:title => title, :author => author, :duedate => duedate, :checkout => checkout})
-  erb(:book_list)
+
+
+  new_book = Book.new({:title => title, :author => author, :id => nil, :duedate => "2018-10-10", :checkout => "f"})
+  new_book.save()
+  redirect("/book_list")
 end
 
 get("/book_list") do
