@@ -18,18 +18,25 @@ end
 post("/add_book") do
   title = params.fetch("title")
   author = params.fetch("author")
-
-
-
   new_book = Book.new({:title => title, :author => author, :id => nil, :duedate => "2018-10-10", :checkout => "f"})
   new_book.save()
   redirect("/book_list")
 end
 
+# <form action="/book_list/alpha" method="post">
+
+
+post("/book_list/titles") do
+  @book_list = Book.sort_by_title
+  erb(:book_list)
+end
+
 get("/book_list") do
+  # binding.pry
   @book_list = Book.all()
   erb(:book_list)
 end
+
 
 get("/book/:id") do
   id = params[:id].to_i
