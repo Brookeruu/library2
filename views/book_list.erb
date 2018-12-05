@@ -3,16 +3,44 @@
 <li>
  <a href="/book/<%= book.id %>"> <%= book.title %> by <%= book.author %> </a>
 </li>
+
 <% end %>
 </ul>
+
+
+<div class="form-group">
+  <form action="/book_search_title" method="get">
+    <label for="title">Search for Title</label>
+    <input type="text" name="title">
+    <button type="submit">Search</button>
+  </form>
+</div>
+<br>
+
+<div class="form-group">
+  <form action="/book_search_author" method="get">
+    <label for="author">Search for Author</label>
+    <input type="text" name="author">
+    <button type="submit">Search</button>
+  </form>
+</div>
+<br>
+
 
 <br>
 <form action="/book_list/titles" method="post">
   <button type="submit">Sort by title</button>
 </form>
 <br>
-<a href="/book_list"> <button type="button" name="button">Back to list</button> </a>
+<form action="/book_list/authors" method="post">
+  <button type="submit">Sort by Author</button>
+</form>
+<br>
+<a href="/book_list"> <button type="button" name="button">Back to List</button> </a>
 
 <a href="/"> <button type="button" name="button">Back to Home</button> </a>
 
 <a href="/add_book"> <button type="button" name="button">Add New Book</button> </a>
+
+<br>
+<br>

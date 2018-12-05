@@ -23,20 +23,40 @@ post("/add_book") do
   redirect("/book_list")
 end
 
-# <form action="/book_list/alpha" method="post">
-
 
 post("/book_list/titles") do
   @book_list = Book.sort_by_title
   erb(:book_list)
 end
 
+post("/book_list/authors") do
+  @book_list = Book.sort_by_author
+  erb(:book_list)
+end
+
 get("/book_list") do
-  # binding.pry
   @book_list = Book.all()
   erb(:book_list)
 end
 
+get("/checkout/:title") do
+  title = params[:title]
+  
+  @book = Book.find_by_title(title)
+  erb(:checkout)
+end
+
+get("/book_search_title") do
+  title = params.fetch('title')
+  @book = Book.find_by_title(title)
+  erb(:book)
+end
+
+get("/book_search_author") do
+  author = params.fetch('author')
+  @book = Book.find_by_author(author)
+  erb(:book)
+end
 
 get("/book/:id") do
   id = params[:id].to_i

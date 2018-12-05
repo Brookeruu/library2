@@ -68,7 +68,7 @@ class Book
   end
 
   def self.find_by_duedate(author)
-    
+
     book = DB.exec("SELECT * FROM book WHERE duedate = '#{duedate}';").first
     title = book.fetch("title")
     author = book.fetch("author")
