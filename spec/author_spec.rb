@@ -48,6 +48,20 @@ describe(Author) do
     end
   end
 
+  describe("#books") do
+    it("returns all of the books a particular author has written") do
+      book = Book.new({:title => "Oceans Eleven", :id => nil})
+      book.save()
+      book2 = Book.new({:title => "Oceans Twelve", :id => nil})
+      book2.save()
+      author = Author.new({:name => "George Clooney", :id => nil})
+      author.save()
+      author.update(:book_ids => [book.id()])
+      author.update(:book_ids => [book2.id()])
+      expect(author.books()).to(eq([book, book2]))
+    end
+  end
+
   describe("#delete") do
     it("lets you delete an author from the database") do
       author = Author.new({:name => "George Clooney", :id => nil})
