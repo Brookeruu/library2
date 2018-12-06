@@ -101,6 +101,7 @@ class Book
   end
 
   def delete
+    DB.exec("DELETE FROM author_book_join WHERE book_id = #{self.id()};")
     DB.exec("DELETE FROM book WHERE id = #{self.id()};")
   end
 

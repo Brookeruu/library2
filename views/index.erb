@@ -1,7 +1,52 @@
 <h1>Library</h1>
 
+<% if @book_list.any?() %>
+<h1>Here is our list of books</h1>
+<ul>
+<% @book_list.each do |book| %>
+  <li>
+    <a href="/books/<%= book.id %>"> <%= book.title %> </a>
+  </li>
+<% end %>
+</ul>
+<% else %>
+  <p>There are no books added yet</p>
+<% end %>
+
+<div class="form-group">
+  <form action="/book_search_title" method="get">
+    <label for="title">Search for Title</label>
+    <input type="text" name="title">
+    <button type="submit">Search</button>
+  </form>
+</div>
+<br>
+
+<% if @authors_list.any?() %>
+<h1>Here is our list of authors</h1>
+<ul>
+<% @authors_list.each do |author| %>
+  <li>
+    <a href="/authors/<%= author.id %>"> <%= author.name %> </a>
+  </li>
+<% end %>
+</ul>
+<% else %>
+  <p>There are no authors added yet</p>
+<% end %>
+
+<div class="form-group">
+  <form action="/book_search_author" method="get">
+    <label for="author">Search for Author</label>
+    <input type="text" name="author">
+    <button type="submit">Search</button>
+  </form>
+</div>
+
 <div class="container">
   <button type="button" name="button"><a href="/add_book">Add New Book</a></button>
+
+  <button type="button" name="button"><a href="/add_author">Add New Author</a></button>
 
   <button type="button" name="button"><a href="/book_list">View Book List</a></button>
 

@@ -1,11 +1,16 @@
+<% if @book_list.any?() %>
+<h1>Here is our list of books</h1>
 <ul>
 <% @book_list.each do |book| %>
-<li>
- <a href="/book/<%= book.id %>"> <%= book.title %> by <%= book.author %> </a>
-</li>
-
+  <li>
+    <a href="/book/<%= book.id %>"> <%= book.title %> </a>
+  </li>
 <% end %>
 </ul>
+<% else %>
+  <p>There are no books added yet</p>
+<% end %>
+
 
 
 <div class="form-group">
@@ -17,25 +22,13 @@
 </div>
 <br>
 
-<div class="form-group">
-  <form action="/book_search_author" method="get">
-    <label for="author">Search for Author</label>
-    <input type="text" name="author">
-    <button type="submit">Search</button>
-  </form>
-</div>
-<br>
-
 
 <br>
 <form action="/book_list/titles" method="post">
   <button type="submit">Sort by title</button>
 </form>
 <br>
-<form action="/book_list/authors" method="post">
-  <button type="submit">Sort by Author</button>
-</form>
-<br>
+
 <a href="/book_list"> <button type="button" name="button">Back to List</button> </a>
 
 <a href="/"> <button type="button" name="button">Back to Home</button> </a>

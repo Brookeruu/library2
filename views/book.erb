@@ -1,4 +1,4 @@
-<h3>Title:  <%= @book.title %> </h3>
+<!-- <h3>Title:  <%= @book.title %> </h3>
 <h3>Author: <%= @book.author %> </h3>
 
 <a href="/book_list"> <button type="button" name="button">Back to list</button> </a>
@@ -8,4 +8,33 @@
 <a href="/add_book"> <button type="button" name="button">Add New Book</button> </a>
 <br>
 <br>
-<a href="/checkout/<%= @book.title %>"> <button type="button" name="button">Checkout Book</button> </a>
+<a href="/checkout/<%= @book.title %>"> <button type="button" name="button">Checkout Book</button> </a> -->
+
+
+<h1>Welcome to the Library page</h1>
+
+<p>Add a book to the database:</p>
+
+<form action="/books" method="post">
+  <label for="title">Book's title:</label>
+  <input id="title" name="title" type="text">
+
+  <button type="submit">Add book</button>
+</form>
+
+
+<% if @books.any?() %>
+  <p>Click on a book to see information about it and add authors to it:</p>
+
+  <ul>
+    <% @books.each do |book| %>
+    <li><a href="/books/<%= book.id() %>"><%= book.title() %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no books added yet!</p>
+<% end %>
+
+<p><a href="/authors">See all authors</a></p>
+
+<p><a href="/">Return to Main Page</a></p>

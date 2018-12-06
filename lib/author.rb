@@ -36,6 +36,9 @@ class Author
   end
 
   def update(attributes)
+    # Notice the lines @name = attributes.fetch(:name, @name) and attributes.fetch(:actor_ids, []). In both we are passing in a second argument to the fetch method.
+
+     # **This provides a default value so if either :name or :actor_ids don't exist, it will return the default value instead of raising the key not found error.**
     @name = attributes.fetch(:name, @name)
     @id = self.id()
     DB.exec("UPDATE authors SET name = '#{@name}' WHERE id = #{@id};")
@@ -59,6 +62,7 @@ class Author
 
 
   def delete
+    DB.exec("DELETE FROM author_book_join WHERE author_id = #{self.id()};")
     DB.exec("DELETE FROM authors WHERE id = #{self.id()};")
   end
 
