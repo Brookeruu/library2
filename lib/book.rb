@@ -94,10 +94,25 @@ class Book
     @title = attributes.fetch(:title, @title)
     @id = self.id()
     DB.exec("UPDATE book SET title = '#{@title}' WHERE id = #{@id};")
+
+    attributes.fetch(:author_ids, []).each() do |author_id|
+      DB.exec("INSERT INTO author_book_join (author_id, book_id) VALUES (#{author_id}, #{self.id()});")
+    end
   end
 
   def delete
     DB.exec("DELETE FROM book WHERE id = #{self.id()};")
   end
 
+  def authors
+    book_authors = []
+    authors = DB.exec("SELECT author_id FROM author_book_join WHERE book_id = #{self.id()};")
+    authors.each() do |author|
+      author_id = author.fetch("author_id").to_i()
+      author = DB.exec("SELECT * FROM authors WHERE id = #{author_id}")
+      name = author.first().fetch("name")
+      book_authors.push(Author.new({:name => name, :id => author_id}))
+    end
+    book_authors
+  end
 end

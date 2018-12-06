@@ -16,7 +16,7 @@ describe(Author) do
   end
 
   describe(".all") do
-    it("starts off with no movies") do
+    it("starts off with no books") do
       expect(Author.all()).to(eq([]))
     end
   end
@@ -58,4 +58,5 @@ describe(Author) do
       expect(Author.all()).to(eq([author2]))
     end
   end
+
 end
