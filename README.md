@@ -13,3 +13,10 @@ duedate  | timestamp without time zone |           |          |
 checkout | boolean
 
 CREATE TABLE patron (name varchar, id serial PRIMARY KEY, checkout varchar, history varchar);
+
+Table "public.authors"
+Column |       Type        | Collation | Nullable |               Default               
+--------+-------------------+-----------+----------+-------------------------------------
+name   | character varying |           |          |
+id     | integer           |           | not null | nextval('authors_id_seq'::regclass)
+Indexes:
